@@ -1,0 +1,9 @@
+{
+  "name": "react-native-style-queries",
+  "version": "0.0.1",
+  "description": "React Native responsive design",
+  "main": "index.js",
+  "repository": "https://github.com/bignerdranch/BNR-react-native-style-queries.git",
+  "author": "Josh Justice <jjustice@bignerdranch.com>",
+  "license": "MIT"
+}
