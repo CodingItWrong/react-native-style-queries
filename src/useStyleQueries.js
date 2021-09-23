@@ -2,7 +2,7 @@ const {useWindowDimensions} = require('react-native');
 
 function useStyleQueries(styleConfig) {
   const {width} = useWindowDimensions();
-  const predicateArgument = ({screenWidth: width});
+  const predicateArgument = {screenWidth: width};
 
   const styleEntries = Object.entries(styleConfig);
 
