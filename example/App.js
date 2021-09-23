@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-const useStyleQueries = require('./useStyleQueries');
-const screenWidthMin = require('./queries/screenWidthMin');
+import { useStyleQueries, screenWidthMin } from 'react-native-style-queries';
 
 export default function App() {
   const styles = useStyleQueries(styleConfig);
