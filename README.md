@@ -18,7 +18,7 @@ It is difficult to apply responsive styling approaches from the web to React Nat
 
 Sass allows nesting media queries inside elements to keep the styles even closer:
 
-```sass
+```scss
 .text {
   font-size: 14pt;
 
