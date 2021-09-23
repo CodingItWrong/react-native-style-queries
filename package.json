@@ -6,6 +6,9 @@
   "repository": "https://github.com/bignerdranch/BNR-react-native-style-queries.git",
   "author": "Josh Justice <jjustice@bignerdranch.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "react-native": "^0.60"
+  },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
