@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useStyleQueries, screenWidthMin } from 'react-native-style-queries';
+import {Text, View} from 'react-native';
+import {screenWidthMin, useStyleQueries} from 'react-native-style-queries';
 
 export default function App() {
   const styles = useStyleQueries(styleConfig);
