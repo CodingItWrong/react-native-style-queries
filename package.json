@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/bignerdranch/BNR-react-native-style-queries.git",
   "author": "Josh Justice <jjustice@bignerdranch.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.2.1"
+  },
+  "scripts": {
+    "test": "jest --watchAll"
+  }
 }
