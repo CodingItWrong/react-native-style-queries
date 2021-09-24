@@ -12,7 +12,7 @@ It is difficult to apply responsive styling approaches from the web to React Nat
 }
 
 @media (min-width: 600px) {
-  font-size: 16px;
+  font-size: 16pt;
 }
 ```
 
@@ -23,7 +23,7 @@ Sass allows nesting media queries inside elements to keep the styles even closer
   font-size: 14pt;
 
   @media (min-width: 600px) {
-    font-size: 16px;
+    font-size: 16pt;
   }
 }
 ```
