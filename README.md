@@ -120,6 +120,10 @@ function screenWidthMin(minWidth, styles) {
 
 When any device info changes (such as screen dimensions based on device rotation), `useWindowDimensions()` or another relevant hook will rerender, causing the styles to be recomputed.
 
+## Example
+
+An example React Native app using `react-native-style-queries` can be found in the [example/](./example/) directory.
+
 ## License
 
 MIT
