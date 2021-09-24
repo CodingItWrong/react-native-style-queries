@@ -32,7 +32,7 @@ React Native stylesheets don't have any such facility. Stylesheets created with 
 
 ## Existing Approaches
 
-- `useWindowDimensions()` is a low-level look that requires custom coding to hook up with styles.
+- React Native's built-in [`useWindowDimensions()`](https://reactnative.dev/docs/usewindowdimensions) is a low-level look that requires custom coding to hook up with styles.
 - [`react-native-size-matters`](https://github.com/nirsky/react-native-size-matters) allows automatically scaling measurements for different screen sizes, which is a different approach from breakpoints.
 - [`react-native-media-query`](https://github.com/kasinskas/react-native-media-query) is directly modeled after media queries. One limitation it has, though, is that it doesn't automatically rerender to handle device rotations. From the readme: "To trigger media queries on device orientation changes for native platforms, for now you will most likely need to update the state, because react-native-media-query has no listeners inside."
 
