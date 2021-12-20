@@ -9,15 +9,20 @@ function useStyleQueries(styleConfig) {
       const reducerInitialValue = {};
       flattenedStyleObject = styleArray.reduce(
         (previousValue, currentValue) => {
+          let stylesToMerge = null;
           if (Array.isArray(currentValue)) {
             const [predicate, conditionalStyleObject] = currentValue;
             if (predicate()) {
-              return {...previousValue, ...conditionalStyleObject};
-            } else {
-              return previousValue;
+              stylesToMerge = conditionalStyleObject;
             }
           } else {
-            return {...previousValue, ...currentValue};
+            stylesToMerge = currentValue;
+          }
+
+          if (stylesToMerge) {
+            return {...previousValue, ...stylesToMerge};
+          } else {
+            return previousValue;
           }
         },
         reducerInitialValue
