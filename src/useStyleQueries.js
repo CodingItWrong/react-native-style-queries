@@ -6,7 +6,8 @@ function useStyleQueries(styleConfig) {
     let flattenedStyleObject;
     if (Array.isArray(styleObjectOrArray)) {
       const styleArray = styleObjectOrArray;
-      if (styleArray.length == 0) {
+      // TODO: set up linter to disallow double-equals
+      if (styleArray.length === 0) {
         flattenedStyleObject = {};
       } else {
         flattenedStyleObject = styleArray[0];
