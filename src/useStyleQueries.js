@@ -2,18 +2,20 @@
 
 function useStyleQueries(styleConfig) {
   const entries = Object.entries(styleConfig);
-  const transformedEntries = entries.map(([key, value]) => {
-    let updatedValue;
-    if (Array.isArray(value)) {
-      if (value.length == 0) {
-        updatedValue = {};
+  const transformedEntries = entries.map(([styleName, styleObjectOrArray]) => {
+    let flattenedStyleObject;
+    if (Array.isArray(styleObjectOrArray)) {
+      const styleArray = styleObjectOrArray;
+      if (styleArray.length == 0) {
+        flattenedStyleObject = {};
       } else {
-        updatedValue = value[0];
+        flattenedStyleObject = styleArray[0];
       }
     } else {
-      updatedValue = value;
+      const styleObject = styleObjectOrArray;
+      flattenedStyleObject = styleObject;
     }
-    return [key, updatedValue];
+    return [styleName, flattenedStyleObject];
   });
   return Object.fromEntries(transformedEntries);
 }
