@@ -65,4 +65,28 @@ describe('useStyleQueries', () => {
       });
     });
   });
+
+  describe('when a style array has three style objects', () => {
+    it('returns all style objects merged, with later objects taking precedence', () => {
+      const input = {
+        myComponent: [
+          {
+            color: 'blue',
+            fontFamily: 'Arial',
+            fontSize: 16,
+          },
+          {fontSize: 22},
+          {fontFamily: 'Times New Roman'},
+        ],
+      };
+      const result = useStyleQueries(input);
+      expect(result).toEqual({
+        myComponent: {
+          color: 'blue',
+          fontFamily: 'Times New Roman',
+          fontSize: 22,
+        },
+      });
+    });
+  });
 });
