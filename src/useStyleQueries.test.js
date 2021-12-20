@@ -142,5 +142,67 @@ describe('useStyleQueries', () => {
     });
   });
 
+  describe('when a style array has two conditions', () => {
+    describe('when neither condition is true', () => {
+      it('returns an empty style object', () => {
+        const input = {
+          myComponent: [
+            [() => false, {color: 'darkRed'}],
+            [() => false, {color: 'red'}],
+          ],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {},
+        });
+      });
+    });
+
+    describe('when only the first condition is true', () => {
+      it("returns the first condition's style", () => {
+        const input = {
+          myComponent: [
+            [() => true, {color: 'green'}],
+            [() => false, {color: 'red'}],
+          ],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {color: 'green'},
+        });
+      });
+    });
+
+    describe('when only the second condition is true', () => {
+      it("returns the second condition's style", () => {
+        const input = {
+          myComponent: [
+            [() => false, {color: 'red'}],
+            [() => true, {color: 'green'}],
+          ],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {color: 'green'},
+        });
+      });
+    });
+
+    describe('when both conditions are true', () => {
+      it("merges the conditions' styles", () => {
+        const input = {
+          myComponent: [
+            [() => true, {color: 'green', fontSize: 16}],
+            [() => true, {fontSize: 22}],
+          ],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {color: 'green', fontSize: 22},
+        });
+      });
+    });
+  });
+
   test.todo('arguments to conditional function, starting with window width');
 });
