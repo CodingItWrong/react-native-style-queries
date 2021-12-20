@@ -115,4 +115,6 @@ describe('useStyleQueries', () => {
       });
     });
   });
+
+  test.todo('arguments to conditional function, starting with window width');
 });
