@@ -47,4 +47,22 @@ describe('useStyleQueries', () => {
       });
     });
   });
+
+  describe('when a style array has two style objects', () => {
+    it('returns the style objects merged, with later objects taking precedence', () => {
+      const input = {
+        myComponent: [
+          {
+            color: 'blue',
+            fontSize: 16,
+          },
+          {fontSize: 22},
+        ],
+      };
+      const result = useStyleQueries(input);
+      expect(result).toEqual({
+        myComponent: {color: 'blue', fontSize: 22},
+      });
+    });
+  });
 });
