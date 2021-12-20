@@ -202,6 +202,29 @@ describe('useStyleQueries', () => {
         });
       });
     });
+
+    describe('when a style array has a mix of objects and conditions', () => {
+      it('merges all objects and true conditions', () => {
+        const input = {
+          myComponent: [
+            [() => true, {color: 'yellow', fontFamily: 'Arial', fontSize: 16}],
+            {fontSize: 22},
+            [() => false, {color: 'red'}],
+            [() => true, {fontFamily: 'Times New Roman'}],
+            {color: 'green'},
+            [() => false, {fontFamily: 'Papyrus'}],
+          ],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {
+            color: 'green',
+            fontFamily: 'Times New Roman',
+            fontSize: 22,
+          },
+        });
+      });
+    });
   });
 
   test.todo('arguments to conditional function, starting with window width');
