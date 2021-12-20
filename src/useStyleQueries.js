@@ -11,8 +11,7 @@ function useStyleQueries(styleConfig) {
     }
     return [key, updatedValue];
   });
-  const result = Object.fromEntries(transformedEntries);
-  return result;
+  return Object.fromEntries(transformedEntries);
 }
 
 module.exports = useStyleQueries;
