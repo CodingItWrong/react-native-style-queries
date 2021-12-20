@@ -6,16 +6,13 @@ function useStyleQueries(styleConfig) {
     let flattenedStyleObject;
     if (Array.isArray(styleObjectOrArray)) {
       const styleArray = styleObjectOrArray;
-      // TODO: set up linter to disallow double-equals
-      if (styleArray.length === 0) {
-        flattenedStyleObject = {};
-      } else {
-        flattenedStyleObject = styleArray.reduce(
-          (previousValue, currentValue) => {
-            return {...previousValue, ...currentValue};
-          }
-        );
-      }
+      const reducerInitialValue = {};
+      flattenedStyleObject = styleArray.reduce(
+        (previousValue, currentValue) => {
+          return {...previousValue, ...currentValue};
+        },
+        reducerInitialValue
+      );
     } else {
       const styleObject = styleObjectOrArray;
       flattenedStyleObject = styleObject;
