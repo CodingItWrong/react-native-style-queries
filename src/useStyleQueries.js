@@ -9,14 +9,12 @@ function useStyleQueries(styleConfig) {
       // TODO: set up linter to disallow double-equals
       if (styleArray.length === 0) {
         flattenedStyleObject = {};
-      } else if (styleArray.length > 1) {
+      } else {
         flattenedStyleObject = styleArray.reduce(
           (previousValue, currentValue) => {
             return {...previousValue, ...currentValue};
           }
         );
-      } else {
-        flattenedStyleObject = styleArray[0];
       }
     } else {
       const styleObject = styleObjectOrArray;
