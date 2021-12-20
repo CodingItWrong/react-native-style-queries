@@ -35,4 +35,16 @@ describe('useStyleQueries', () => {
       });
     });
   });
+
+  describe('when a style array has just one object', () => {
+    it('returns that style object directly', () => {
+      const input = {
+        myComponent: [{fontSize: 16}],
+      };
+      const result = useStyleQueries(input);
+      expect(result).toEqual({
+        myComponent: {fontSize: 16},
+      });
+    });
+  });
 });

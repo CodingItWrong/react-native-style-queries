@@ -5,7 +5,11 @@ function useStyleQueries(styleConfig) {
   const transformedEntries = entries.map(([key, value]) => {
     let updatedValue;
     if (Array.isArray(value)) {
-      updatedValue = {};
+      if (value.length == 0) {
+        updatedValue = {};
+      } else {
+        updatedValue = value[0];
+      }
     } else {
       updatedValue = value;
     }
