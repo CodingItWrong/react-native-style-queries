@@ -116,5 +116,31 @@ describe('useStyleQueries', () => {
     });
   });
 
+  describe('when a style array has an object followed by a condition', () => {
+    describe('when the condition is false', () => {
+      it('returns the style object', () => {
+        const input = {
+          myComponent: [{color: 'green'}, [() => false, {color: 'red'}]],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {color: 'green'},
+        });
+      });
+    });
+
+    describe('when the condition is true', () => {
+      it('merges the conditional styles into the object', () => {
+        const input = {
+          myComponent: [{color: 'red'}, [() => true, {color: 'green'}]],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {color: 'green'},
+        });
+      });
+    });
+  });
+
   test.todo('arguments to conditional function, starting with window width');
 });
