@@ -23,4 +23,16 @@ describe('useStyleQueries', () => {
       expect(result).toEqual(plainStyles);
     });
   });
+
+  xdescribe('when an empty array is passed for a style name', () => {
+    it('returns an empty style object', () => {
+      const input = {
+        myComponentA: [],
+      };
+      const result = useStyleQueries(input);
+      expect(result).toEqual({
+        myComponentA: {},
+      });
+    });
+  });
 });
