@@ -89,4 +89,18 @@ describe('useStyleQueries', () => {
       });
     });
   });
+
+  describe('when a style array has one condition', () => {
+    describe('when the condition is false', () => {
+      it('returns an empty style object', () => {
+        const input = {
+          myComponent: [[() => false, {color: 'red'}]],
+        };
+        const result = useStyleQueries(input);
+        expect(result).toEqual({
+          myComponent: {},
+        });
+      });
+    });
+  });
 });

@@ -9,7 +9,11 @@ function useStyleQueries(styleConfig) {
       const reducerInitialValue = {};
       flattenedStyleObject = styleArray.reduce(
         (previousValue, currentValue) => {
-          return {...previousValue, ...currentValue};
+          if (Array.isArray(currentValue)) {
+            return {};
+          } else {
+            return {...previousValue, ...currentValue};
+          }
         },
         reducerInitialValue
       );
