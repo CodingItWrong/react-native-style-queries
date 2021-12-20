@@ -2,7 +2,16 @@
 
 function useStyleQueries(styleConfig) {
   const entries = Object.entries(styleConfig);
-  const result = Object.fromEntries(entries);
+  const transformedEntries = entries.map(([key, value]) => {
+    let updatedValue;
+    if (Array.isArray(value)) {
+      updatedValue = {};
+    } else {
+      updatedValue = value;
+    }
+    return [key, updatedValue];
+  });
+  const result = Object.fromEntries(transformedEntries);
   return result;
 }
 

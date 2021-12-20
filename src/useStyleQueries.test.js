@@ -24,7 +24,7 @@ describe('useStyleQueries', () => {
     });
   });
 
-  xdescribe('when an empty array is passed for a style name', () => {
+  describe('when an empty array is passed for a style name', () => {
     it('returns an empty style object', () => {
       const input = {
         myComponentA: [],
