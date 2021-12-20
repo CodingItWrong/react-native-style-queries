@@ -5,35 +5,38 @@ function useStyleQueries(styleConfig) {
   const transformedEntries = entries.map(([styleName, styleObjectOrArray]) => {
     let flattenedStyleObject;
     if (Array.isArray(styleObjectOrArray)) {
-      const styleArray = styleObjectOrArray;
-      const reducerInitialValue = {};
-      flattenedStyleObject = styleArray.reduce(
-        (previousValue, currentValue) => {
-          let stylesToMerge = null;
-          if (Array.isArray(currentValue)) {
-            const [predicate, conditionalStyleObject] = currentValue;
-            if (predicate()) {
-              stylesToMerge = conditionalStyleObject;
-            }
-          } else {
-            stylesToMerge = currentValue;
-          }
-
-          if (stylesToMerge) {
-            return {...previousValue, ...stylesToMerge};
-          } else {
-            return previousValue;
-          }
-        },
-        reducerInitialValue
-      );
+      flattenedStyleObject = flattenStyleArray(styleObjectOrArray);
     } else {
-      const styleObject = styleObjectOrArray;
-      flattenedStyleObject = styleObject;
+      flattenedStyleObject = styleObjectOrArray;
     }
     return [styleName, flattenedStyleObject];
   });
   return Object.fromEntries(transformedEntries);
+}
+
+function flattenStyleArray(styleArray) {
+  const reducerInitialValue = {};
+  const flattenedStyleObject = styleArray.reduce(
+    (previousValue, currentValue) => {
+      let stylesToMerge = null;
+      if (Array.isArray(currentValue)) {
+        const [predicate, conditionalStyleObject] = currentValue;
+        if (predicate()) {
+          stylesToMerge = conditionalStyleObject;
+        }
+      } else {
+        stylesToMerge = currentValue;
+      }
+
+      if (stylesToMerge) {
+        return {...previousValue, ...stylesToMerge};
+      } else {
+        return previousValue;
+      }
+    },
+    reducerInitialValue
+  );
+  return flattenedStyleObject;
 }
 
 module.exports = useStyleQueries;
