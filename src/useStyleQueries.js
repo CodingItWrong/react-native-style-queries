@@ -10,7 +10,12 @@ function useStyleQueries(styleConfig) {
       flattenedStyleObject = styleArray.reduce(
         (previousValue, currentValue) => {
           if (Array.isArray(currentValue)) {
-            return {};
+            const [predicate, conditionalStyleObject] = currentValue;
+            if (predicate()) {
+              return {...previousValue, ...conditionalStyleObject};
+            } else {
+              return previousValue;
+            }
           } else {
             return {...previousValue, ...currentValue};
           }
