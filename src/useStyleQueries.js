@@ -1,16 +1,21 @@
 // const {useWindowDimensions} = require('react-native');
 
 function useStyleQueries(styleConfig) {
-  const entries = Object.entries(styleConfig);
-  const transformedEntries = entries.map(([styleName, styleObjectOrArray]) => {
-    let flattenedStyleObject;
+  return mapPropertyValues(styleConfig, styleObjectOrArray => {
     if (Array.isArray(styleObjectOrArray)) {
-      flattenedStyleObject = flattenStyleArray(styleObjectOrArray);
+      return flattenStyleArray(styleObjectOrArray);
     } else {
-      flattenedStyleObject = styleObjectOrArray;
+      return styleObjectOrArray;
     }
-    return [styleName, flattenedStyleObject];
   });
+}
+
+function mapPropertyValues(object, mapFunction) {
+  const entries = Object.entries(object);
+  const transformedEntries = entries.map(([key, value]) => [
+    key,
+    mapFunction(value),
+  ]);
   return Object.fromEntries(transformedEntries);
 }
 
