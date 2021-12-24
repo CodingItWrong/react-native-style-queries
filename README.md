@@ -70,20 +70,25 @@ const styleQueries = {
   myComponentB: [
     //...
   ],
+
+  componentWithNoConditions: {
+    fontSize: 22,
+  },
 };
 ```
 
 Notice a few different aspects:
 
-- Like with Sass, all the styles for a given component like `myComponentA` are kept in one place. You can see a component's default styles and conditional styles.
+- A style name can have a single object for its styles if it has no conditions. If it has conditions, its value is an array. That array can contain objects for styles that are unconditional. For styles that are conditional, a call to a style query function like `screenWidthMin()` ensures that those styles are only included when conditions are met.
+- As a result, like with Sass, all the styles for a given component like `myComponentA` are kept in one place.
 - Each style object has the structure of a normal React Native style object. We just add additional structure outside of them to add conditional styles.
-- We use helper functions like `screenWidthMin()` to keep the data structure as readable as possible. Under the hood the data could map to something like:
+- Under the hood style query functions could return a structure like:
 
 
 ```js
 const styleQueries = {
   myComponentA: [
-    { fontSize: 12 }, // defaults
+    { fontSize: 12 },
 
     [({screenWidth}) => screenWidth >= 375, {
       fontSize: 16,
@@ -93,29 +98,21 @@ const styleQueries = {
       fontSize: 18,
     }],
   ],
-
-  myComponentA: [
-    { fontSize: 12 }, // defaults
-    // overrides
-  ],
 }
 ```
 
 Note the following:
-- The default styles are a normal React Native style-formatted object.
 - Each conditional set of styles is an array with two elements:
   - The first element is an arrow function that receives attributes of the current device situation, and returns true if this set of styles should be applied. `screenWidth` is the most commonly used for responsive design, but height, dark mode, and other attributes can all be supplied as well. Additional attributes can be added in future versions without breaking the API. And because it's a JavaScript function, logic can be computed however you like.
-  - The second element is a nromal React Native style-formatted object that will be applied if the first element returns true.
+  - The second element is a normal React Native style-formatted object that will be applied if the first element returns true.
 
-So conditional helper functions are just a lightweight wrapper around this data structure to add readability:
+So style query functions are just a lightweight wrapper around this data structure to add readability:
 
 ```js
-function screenWidthMin(minWidth, styles) {
-  return [
-    ({screenWidth}) => screenWidth >= minWidth,
-    styles,
-  ];
-}
+const screenWidthMin = (minimumWidth, conditionalStyles) => {
+  const predicate = ({screenWidth}) => screenWidth >= minimumWidth;
+  return [predicate, conditionalStyles];
+};
 ```
 
 When any device info changes (such as screen dimensions based on device rotation), `useWindowDimensions()` or another relevant hook will rerender, causing the styles to be recomputed.
