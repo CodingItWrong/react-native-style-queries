@@ -1,9 +1,12 @@
-// const {useWindowDimensions} = require('react-native');
+const {useWindowDimensions} = require('react-native');
 
 function useStyleQueries(styleConfig) {
+  const {width} = useWindowDimensions();
+  const predicateArgument = {screenWidth: width};
+
   return mapPropertyValues(styleConfig, styleObjectOrArray => {
     if (Array.isArray(styleObjectOrArray)) {
-      return flattenStyleArray(styleObjectOrArray);
+      return flattenStyleArray({styleArray: styleObjectOrArray, predicateArgument});
     } else {
       return styleObjectOrArray;
     }
@@ -19,14 +22,14 @@ function mapPropertyValues(object, mapFunction) {
   return Object.fromEntries(transformedEntries);
 }
 
-function flattenStyleArray(styleArray) {
+function flattenStyleArray({styleArray, predicateArgument}) {
   const reducerInitialValue = {};
   const flattenedStyleObject = styleArray.reduce(
     (previousValue, currentValue) => {
       let stylesToMerge = null;
       if (Array.isArray(currentValue)) {
         const [predicate, conditionalStyleObject] = currentValue;
-        if (predicate()) {
+        if (predicate(predicateArgument)) {
           stylesToMerge = conditionalStyleObject;
         }
       } else {
