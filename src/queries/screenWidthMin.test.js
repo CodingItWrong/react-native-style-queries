@@ -13,6 +13,15 @@ describe('screenWidthMin', () => {
       });
     });
 
+    describe('when screen width is equal to the minimum', () => {
+      it('returns true', () => {
+        const screenWidth = minimumWidth;
+        const [predicate] = screenWidthMin(minimumWidth, {});
+        const returnValue = predicate({screenWidth});
+        expect(returnValue).toEqual(true);
+      });
+    });
+
     describe('when screen width is greater than the minimum', () => {
       it('returns true', () => {
         const screenWidth = minimumWidth + 1;
