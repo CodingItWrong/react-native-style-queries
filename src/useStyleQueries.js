@@ -4,25 +4,47 @@ function useStyleQueries(styleConfig) {
   const {width} = useWindowDimensions();
   const predicateArgument = {screenWidth: width};
 
-  const styleEntries = Object.entries(styleConfig);
-
-  const styleEntriesToApply = styleEntries.map(([key, styleClauses]) => {
-    // TODO: determine if any entry can be a "defaults" object
-    const styleObject = styleClauses.reduce((acc, clause) => {
-      const [predicate, conditionalStyleObject] = clause;
-
-      const doesClauseMatch = predicate(predicateArgument);
-      if (doesClauseMatch) {
-        return {...acc, ...conditionalStyleObject};
-      } else {
-        return acc;
-      }
-    });
-
-    return [key, styleObject];
+  return mapPropertyValues(styleConfig, styleObjectOrArray => {
+    if (Array.isArray(styleObjectOrArray)) {
+      return flattenStyleArray({styleArray: styleObjectOrArray, predicateArgument});
+    } else {
+      return styleObjectOrArray;
+    }
   });
+}
 
-  return Object.fromEntries(styleEntriesToApply);
+function mapPropertyValues(object, mapFunction) {
+  const entries = Object.entries(object);
+  const transformedEntries = entries.map(([key, value]) => [
+    key,
+    mapFunction(value),
+  ]);
+  return Object.fromEntries(transformedEntries);
+}
+
+function flattenStyleArray({styleArray, predicateArgument}) {
+  const reducerInitialValue = {};
+  const flattenedStyleObject = styleArray.reduce(
+    (previousValue, currentValue) => {
+      let stylesToMerge = null;
+      if (Array.isArray(currentValue)) {
+        const [predicate, conditionalStyleObject] = currentValue;
+        if (predicate(predicateArgument)) {
+          stylesToMerge = conditionalStyleObject;
+        }
+      } else {
+        stylesToMerge = currentValue;
+      }
+
+      if (stylesToMerge) {
+        return {...previousValue, ...stylesToMerge};
+      } else {
+        return previousValue;
+      }
+    },
+    reducerInitialValue
+  );
+  return flattenedStyleObject;
 }
 
 module.exports = useStyleQueries;
