@@ -12,6 +12,15 @@ describe('screenWidthMin', () => {
         expect(returnValue).toEqual(false);
       });
     });
+
+    describe('when screen width is greater than the minimum', () => {
+      it('returns true', () => {
+        const screenWidth = minimumWidth + 1;
+        const [predicate] = screenWidthMin(minimumWidth, {});
+        const returnValue = predicate({screenWidth});
+        expect(returnValue).toEqual(true);
+      });
+    });
   });
 
   describe('the second element of the returned array, the conditional styles', () => {

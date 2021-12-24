@@ -1,5 +1,5 @@
-const screenWidthMin = (_, conditionalStyles) => [
-  () => false,
+const screenWidthMin = (minimumWidth, conditionalStyles) => [
+  ({screenWidth}) => screenWidth > minimumWidth,
   conditionalStyles,
 ];
 
