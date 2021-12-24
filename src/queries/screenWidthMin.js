@@ -1,6 +1,3 @@
-const screenWidthMin = (minWidth, styles) => [
-  ({screenWidth}) => screenWidth >= minWidth,
-  styles,
-];
+const screenWidthMin = (_, conditionalStyles) => [null, conditionalStyles];
 
 module.exports = screenWidthMin;
