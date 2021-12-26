@@ -6,7 +6,10 @@ function useStyleQueries(styleConfig) {
 
   return mapPropertyValues(styleConfig, styleObjectOrArray => {
     if (Array.isArray(styleObjectOrArray)) {
-      return flattenStyleArray({styleArray: styleObjectOrArray, predicateArgument});
+      return flattenStyleArray({
+        styleArray: styleObjectOrArray,
+        predicateArgument,
+      });
     } else {
       return styleObjectOrArray;
     }
