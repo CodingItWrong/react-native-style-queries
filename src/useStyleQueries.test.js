@@ -97,12 +97,14 @@ describe('useStyleQueries', () => {
   });
 
   describe('when a style array has one condition', () => {
-    it('passes the screen width into the predicate function', () => {
-      const predicate = args => expect(args.screenWidth).toEqual(screenWidth);
-      const input = {
-        myComponent: [[predicate, {}]],
-      };
-      useStyleQueries(input);
+    describe('attributes passed into the predicate function', () => {
+      test('screen width', () => {
+        const predicate = args => expect(args.screenWidth).toEqual(screenWidth);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
     });
 
     describe('when the condition is false', () => {
