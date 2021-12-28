@@ -2,8 +2,10 @@ const useStyleQueries = require('./useStyleQueries');
 
 const MOCK_SCREEN_WIDTH = 375;
 const MOCK_SCREEN_HEIGHT = 667;
+const MOCK_COLOR_SCHEME = 'dark';
 
 jest.mock('react-native', () => ({
+  useColorScheme: () => MOCK_COLOR_SCHEME,
   useWindowDimensions: () => ({
     width: MOCK_SCREEN_WIDTH,
     height: MOCK_SCREEN_HEIGHT,
@@ -109,6 +111,15 @@ describe('useStyleQueries', () => {
       test('screen height', () => {
         const predicate = args =>
           expect(args.screenHeight).toEqual(MOCK_SCREEN_HEIGHT);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
+
+      test('color scheme', () => {
+        const predicate = args =>
+          expect(args.colorScheme).toEqual(MOCK_COLOR_SCHEME);
         const input = {
           myComponent: [[predicate, {}]],
         };
