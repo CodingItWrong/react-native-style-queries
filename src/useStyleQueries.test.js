@@ -1,17 +1,14 @@
 const useStyleQueries = require('./useStyleQueries');
-const {useWindowDimensions} = require('react-native');
+
+const MOCK_SCREEN_WIDTH = 375;
 
 jest.mock('react-native', () => ({
-  useWindowDimensions: jest.fn(),
+  useWindowDimensions: () => ({
+    width: MOCK_SCREEN_WIDTH,
+  }),
 }));
 
 describe('useStyleQueries', () => {
-  const screenWidth = 375;
-
-  beforeEach(() => {
-    useWindowDimensions.mockReturnValue({width: screenWidth});
-  });
-
   describe('when no styles are passed', () => {
     it('returns an empty style object', () => {
       const styles = useStyleQueries({});
@@ -99,7 +96,8 @@ describe('useStyleQueries', () => {
   describe('when a style array has one condition', () => {
     describe('attributes passed into the predicate function', () => {
       test('screen width', () => {
-        const predicate = args => expect(args.screenWidth).toEqual(screenWidth);
+        const predicate = args =>
+          expect(args.screenWidth).toEqual(MOCK_SCREEN_WIDTH);
         const input = {
           myComponent: [[predicate, {}]],
         };
