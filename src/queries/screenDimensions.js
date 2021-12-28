@@ -1,7 +1,4 @@
-const buildQuery = predicateBuilder => (argument, conditionalStyles) => {
-  const predicate = predicateBuilder(argument);
-  return [predicate, conditionalStyles];
-};
+const buildQuery = require('./buildQuery');
 
 const screenHeightMax = buildQuery(
   maximumHeight =>
