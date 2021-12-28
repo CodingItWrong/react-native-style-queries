@@ -1,11 +1,18 @@
-const screenWidthMax = (maximumWidth, conditionalStyles) => {
-  const predicate = ({screenWidth}) => screenWidth <= maximumWidth;
+const buildQuery = predicateBuilder => (argument, conditionalStyles) => {
+  const predicate = predicateBuilder(argument);
   return [predicate, conditionalStyles];
 };
 
-const screenWidthMin = (minimumWidth, conditionalStyles) => {
-  const predicate = ({screenWidth}) => screenWidth >= minimumWidth;
-  return [predicate, conditionalStyles];
-};
+const screenWidthMax = buildQuery(
+  maximumWidth =>
+    ({screenWidth}) =>
+      screenWidth <= maximumWidth
+);
+
+const screenWidthMin = buildQuery(
+  minimumWidth =>
+    ({screenWidth}) =>
+      screenWidth >= minimumWidth
+);
 
 module.exports = {screenWidthMax, screenWidthMin};
