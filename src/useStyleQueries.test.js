@@ -1,17 +1,18 @@
 const useStyleQueries = require('./useStyleQueries');
-const {useWindowDimensions} = require('react-native');
+
+const MOCK_SCREEN_WIDTH = 375;
+const MOCK_SCREEN_HEIGHT = 667;
+const MOCK_COLOR_SCHEME = 'dark';
 
 jest.mock('react-native', () => ({
-  useWindowDimensions: jest.fn(),
+  useColorScheme: () => MOCK_COLOR_SCHEME,
+  useWindowDimensions: () => ({
+    width: MOCK_SCREEN_WIDTH,
+    height: MOCK_SCREEN_HEIGHT,
+  }),
 }));
 
 describe('useStyleQueries', () => {
-  const screenWidth = 375;
-
-  beforeEach(() => {
-    useWindowDimensions.mockReturnValue({width: screenWidth});
-  });
-
   describe('when no styles are passed', () => {
     it('returns an empty style object', () => {
       const styles = useStyleQueries({});
@@ -97,12 +98,33 @@ describe('useStyleQueries', () => {
   });
 
   describe('when a style array has one condition', () => {
-    it('passes the screen width into the predicate function', () => {
-      const predicate = args => expect(args.screenWidth).toEqual(screenWidth);
-      const input = {
-        myComponent: [[predicate, {}]],
-      };
-      useStyleQueries(input);
+    describe('attributes passed into the predicate function', () => {
+      test('screen width', () => {
+        const predicate = args =>
+          expect(args.screenWidth).toEqual(MOCK_SCREEN_WIDTH);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
+
+      test('screen height', () => {
+        const predicate = args =>
+          expect(args.screenHeight).toEqual(MOCK_SCREEN_HEIGHT);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
+
+      test('color scheme', () => {
+        const predicate = args =>
+          expect(args.colorScheme).toEqual(MOCK_COLOR_SCHEME);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
     });
 
     describe('when the condition is false', () => {
