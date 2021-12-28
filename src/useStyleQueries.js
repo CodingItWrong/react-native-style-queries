@@ -1,8 +1,8 @@
 const {useWindowDimensions} = require('react-native');
 
 function useStyleQueries(styleConfig) {
-  const {width} = useWindowDimensions();
-  const predicateArgument = {screenWidth: width};
+  const {height, width} = useWindowDimensions();
+  const predicateArgument = {screenHeight: height, screenWidth: width};
 
   return mapPropertyValues(styleConfig, styleObjectOrArray => {
     if (Array.isArray(styleObjectOrArray)) {

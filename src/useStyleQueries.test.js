@@ -1,10 +1,12 @@
 const useStyleQueries = require('./useStyleQueries');
 
 const MOCK_SCREEN_WIDTH = 375;
+const MOCK_SCREEN_HEIGHT = 667;
 
 jest.mock('react-native', () => ({
   useWindowDimensions: () => ({
     width: MOCK_SCREEN_WIDTH,
+    height: MOCK_SCREEN_HEIGHT,
   }),
 }));
 
@@ -98,6 +100,15 @@ describe('useStyleQueries', () => {
       test('screen width', () => {
         const predicate = args =>
           expect(args.screenWidth).toEqual(MOCK_SCREEN_WIDTH);
+        const input = {
+          myComponent: [[predicate, {}]],
+        };
+        useStyleQueries(input);
+      });
+
+      test('screen height', () => {
+        const predicate = args =>
+          expect(args.screenHeight).toEqual(MOCK_SCREEN_HEIGHT);
         const input = {
           myComponent: [[predicate, {}]],
         };
