@@ -1,4 +1,4 @@
-const screenWidthMin = require('./screenWidthMin');
+const {screenWidthMin} = require('./screenWidthMin');
 
 describe('screenWidthMin', () => {
   describe('the first element of the returned array, the predicate', () => {

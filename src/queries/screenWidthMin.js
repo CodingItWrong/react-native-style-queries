@@ -3,4 +3,4 @@ const screenWidthMin = (minimumWidth, conditionalStyles) => {
   return [predicate, conditionalStyles];
 };
 
-module.exports = screenWidthMin;
+module.exports = {screenWidthMin};
