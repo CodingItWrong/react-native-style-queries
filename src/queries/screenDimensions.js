@@ -3,6 +3,18 @@ const buildQuery = predicateBuilder => (argument, conditionalStyles) => {
   return [predicate, conditionalStyles];
 };
 
+const screenHeightMax = buildQuery(
+  maximumHeight =>
+    ({screenHeight}) =>
+      screenHeight <= maximumHeight
+);
+
+const screenHeightMin = buildQuery(
+  minimumHeight =>
+    ({screenHeight}) =>
+      screenHeight >= minimumHeight
+);
+
 const screenWidthMax = buildQuery(
   maximumWidth =>
     ({screenWidth}) =>
@@ -15,4 +27,9 @@ const screenWidthMin = buildQuery(
       screenWidth >= minimumWidth
 );
 
-module.exports = {screenWidthMax, screenWidthMin};
+module.exports = {
+  screenHeightMax,
+  screenHeightMin,
+  screenWidthMax,
+  screenWidthMin,
+};
