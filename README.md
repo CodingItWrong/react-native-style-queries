@@ -24,6 +24,14 @@ const styleQueries = {
 };
 ```
 
+## Installation
+
+`yarn add react-native-style-queries`
+
+or
+
+`npm install --save react-native-style-queries`
+
 ## Usage
 
 Using `react-native-style-queries` involves two steps:
