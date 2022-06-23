@@ -16,7 +16,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.0.3",
     "prettier": "^2.4.1",
-    "react-native": "^0.68.1"
+    "react-native": "^0.69.0"
   },
   "scripts": {
     "test": "jest --watchAll",
