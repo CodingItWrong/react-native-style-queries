@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "React Native responsive design",
   "main": "index.js",
-  "repository": "https://github.com/bignerdranch/BNR-react-native-style-queries.git",
-  "author": "Josh Justice <jjustice@bignerdranch.com>",
+  "repository": "https://github.com/codingitwrong/react-native-style-queries.git",
+  "homepage": "https://github.com/codingitwrong/react-native-style-queries#readme",
+  "author": "Josh Justice <me@codingitwrong.com>",
   "license": "MIT",
   "peerDependencies": {
     "react-native": "^0.60"
